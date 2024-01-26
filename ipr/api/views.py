@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, filters
 from rest_framework.response import Response
 
 from .permissions import IsAdminOrSelf, IsAuthenticatedReadOnly
@@ -20,6 +20,18 @@ class UserListViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAdminUser,)
+    filter_backends = (
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    )
+    filterset_fields = (
+        "name",
+        "lastname",
+    )
+    search_fields = ("lastname",)
+    ordering_fields = ("lastname",)
+    ordering = ("lastname",)
 
 
 class UserDetailViewSet(viewsets.ReadOnlyModelViewSet):
