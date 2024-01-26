@@ -48,7 +48,7 @@ class ReadIprSerializer(serializers.ModelSerializer):
 
 
 class CreateIprSerializer(serializers.ModelSerializer):
-    employee = serializers.PrimaryKeyRelatedField( 
+    employee = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
     )
 
@@ -62,7 +62,7 @@ class CreateIprSerializer(serializers.ModelSerializer):
             )
         request = self.context.get('request')
         # if validated_data.get('employee') == request.user.subordinates:
-        if request.user.superior: # Если руководитель/подчиненный определяется в модели User типом bool
+        if request.user.superior:  # Если руководитель/подчиненный определяется в модели User типом bool
             ipr = Ipr.objects.create(**validated_data)
         return ipr
 
