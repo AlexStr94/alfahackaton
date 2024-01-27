@@ -26,13 +26,9 @@ class UserListViewSet(viewsets.ReadOnlyModelViewSet):
         filters.SearchFilter,
         filters.OrderingFilter,
     )
-    filterset_fields = (
-        "name",
-        "lastname",
-    )
-    search_fields = ("lastname",)
-    ordering_fields = ("lastname",)
-    ordering = ("lastname",)
+    search_fields = ("last_name",)
+    ordering_fields = ("last_name",)
+    ordering = ("last_name",)
 
 
 class MeUserViewSet(viewsets.ReadOnlyModelViewSet):

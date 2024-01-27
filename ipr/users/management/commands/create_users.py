@@ -10,6 +10,7 @@ class Command(BaseCommand):
             for i in range(1, 10):
                 User.objects.create(
                     username="User" + f"{i}",
+                    email=f"ivan{i}@ya.ru",
                     first_name="Иван" + f"{i}",
                     last_name="Иванов",
                     patronymic="Иванович",
