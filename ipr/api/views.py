@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django_filters.rest_framework import DjangoFilterBackend
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import permissions, viewsets, filters
 from rest_framework.response import Response
 
-from .permissions import IsAdminOrSelf, IsAuthenticatedReadOnly
+from .permissions import IsAuthenticatedReadOnly
 from .serializers import (
     CommentSerializer,
     CreateTaskSerializer,
@@ -19,7 +20,7 @@ from users.models import User
 class UserListViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (IsAuthenticatedReadOnly,)
     filter_backends = (
         DjangoFilterBackend,
         filters.SearchFilter,
@@ -34,13 +35,17 @@ class UserListViewSet(viewsets.ReadOnlyModelViewSet):
     ordering = ("lastname",)
 
 
-class UserDetailViewSet(viewsets.ReadOnlyModelViewSet):
+class MeUserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (
-        IsAdminOrSelf,
-        IsAuthenticatedReadOnly,
-    )
+    permission_classes = (IsAuthenticatedReadOnly,)
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        try:
+            return qs.filter(pk=self.request.user.pk)
+        except ObjectDoesNotExist:
+            return qs.none()
 
 
 class SubordinateViewSet(viewsets.ReadOnlyModelViewSet):

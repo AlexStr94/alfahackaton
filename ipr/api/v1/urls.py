@@ -11,6 +11,7 @@ v1_router.register(
     r"tasks/(?P<task_id>\d+)/comments", views.CommentViewSet, basename="comment"
 )
 v1_router.register("users", views.UserListViewSet, basename="users")
+v1_router.register("users/me", views.MeUserViewSet, basename="users/me")
 v1_router.register(
     "users/get_subordinates",
     views.SubordinateViewSet,
