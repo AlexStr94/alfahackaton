@@ -77,11 +77,11 @@ class Ipr(models.Model):
 class Task(models.Model):
     """Модель задач"""
     STATUS_CHOICE = [
-        ('failed', 'Просрочен'),
-        ('no_status', 'Без статуса'),
-        ('in_progress', 'В работе'),
-        ('done', 'Выполнен'),
-        ('canceled', 'Отменен'),
+        ('Failed', 'Просрочен'),
+        ('No status', 'Без статуса'),
+        ('In progress', 'В работе'),
+        ('Done', 'Выполнен'),
+        ('Canceled', 'Отменен'),
     ]
     title = models.CharField(
         max_length=200,
@@ -93,7 +93,7 @@ class Task(models.Model):
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICE,
-        default='no_status',
+        default='No status',
         verbose_name='Статус'
     )
     author = models.ForeignKey(
