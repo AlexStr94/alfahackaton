@@ -146,13 +146,6 @@ class Comment(models.Model):
         auto_now_add=True,
         db_index=True
     )
-    reply = models.ForeignKey(
-        'self',
-        related_name=('replies'),
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True
-    )
 
     class Meta:
         verbose_name = 'Коментарий'

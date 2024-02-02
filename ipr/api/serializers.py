@@ -173,8 +173,8 @@ class UpdateTaskSerializer(serializers.ModelSerializer):
             'status',
             'author',
             'status',
-            'end_date',
             'created_date',
+            'end_date',
             'start_date'
         )
 
@@ -259,6 +259,6 @@ class CommentSerializer(serializers.ModelSerializer):
             'author',
             'text',
             'created_date',
-            'reply'
+            # 'reply'
         )
         read_only_fields = ('task',)

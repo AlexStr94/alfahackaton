@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ipr
+from .models import Comment, Ipr, Task
 
 
 @admin.register(Ipr)
@@ -18,3 +18,13 @@ class IprAdmin(admin.ModelAdmin):
     search_fields = ('title', 'employee', 'author',)
     list_filter = ('id', 'title', 'employee', 'author')
     empty_value_display = '-пусто-'
+
+
+@admin.register(Task)
+class TaskAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
