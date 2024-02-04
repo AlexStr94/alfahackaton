@@ -44,7 +44,7 @@ class Command(BaseCommand):
                 last_name=choice(LAST_NAMES),
                 patronymic=choice(SURNAMES),
                 position='Python developer',
-                photo=f'users/subordinates_{i}',
+                photo=f'users/subordinates_{i}.jpg',
             )
             user.superiors.add(superior)
             user.set_password(PASSWORD)
